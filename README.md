@@ -50,6 +50,6 @@ sources 是所有 swagger 的地址，Name 是服务名称，url 是地址，如
 
 开源不易，如果 dogdoc 对您有所帮助，就给个小星星吧。
 
-WeChat 我要打赏
+WeChat 请作者喝杯咖啡
 
 <img src="image-chat.png" width="200" height="200" />
