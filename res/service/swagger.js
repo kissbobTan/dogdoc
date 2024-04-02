@@ -2,10 +2,14 @@ const common = require("./common");
 const config = require("../../config");
 
 let swaggerDB = {};
+let errors = [];
 
 module.exports = {
   getSwaggerDB: function () {
     return swaggerDB;
+  },
+  geterrors: function () {
+    return errors;
   },
   getApi: function (swaggerData) {
     let apis = {};
@@ -227,6 +231,7 @@ module.exports = {
     return swaggerPaths;
   },
   loadData: async function (fastify) {
+    errors = [];
     fastify.log.info(`loadData:` + new Date());
     let swaggerPaths = await this.getSwaggerPath();
     if (swaggerPaths.length == 0) {
@@ -252,11 +257,18 @@ module.exports = {
             infos[url].success = false;
           } else {
             //success
-            infos[url].pulltime = new Date();
-            infos[url].url = this.getHost(infos[url].apiUrl);
-            infos[url].apis = this.getApi(results[index]);
-            infos[url].schemas = results[index].components.schemas;
-            infos[url].success = true;
+            if (results[index].url == undefined || results[index].url == null) {
+              infos[url].pulltime = new Date();
+              infos[url].url = this.getHost(infos[url].apiUrl);
+              infos[url].apis = this.getApi(results[index]);
+              infos[url].schemas = results[index].components.schemas;
+              infos[url].success = true;
+            } else {
+              errors.push(
+                "current error server address，please quickly recover it,we will get it again next：" +
+                  results[index].url
+              );
+            }
           }
         }
         swaggerDB = infos;

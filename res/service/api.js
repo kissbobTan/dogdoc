@@ -135,4 +135,7 @@ module.exports = {
   getAll: function () {
     return swagger.getSwaggerDB();
   },
+  getError: function () {
+    return swagger.geterrors();
+  },
 };

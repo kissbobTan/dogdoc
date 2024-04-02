@@ -7,7 +7,8 @@ module.exports = {
       const data = response.data;
       return data;
     } catch (error) {
-      console.error(new Date());
+      console.error("commonjs-" + new Date());
+      error.url = url;
       console.error(error);
       return error;
     }
@@ -18,7 +19,8 @@ module.exports = {
       const responseData = response.data;
       return responseData;
     } catch (error) {
-      console.error(new Date());
+      console.error("commonjs-" + new Date());
+      error.url = url;
       console.error(error);
       return error;
     }

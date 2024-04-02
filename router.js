@@ -24,5 +24,9 @@ module.exports = {
       return await common.proxy(config);
       // 其他处理逻辑...
     });
+
+    f.get("/service/getError", async () => {
+      return api.getError();
+    });
   },
 };
