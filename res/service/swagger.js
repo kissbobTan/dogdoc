@@ -26,6 +26,10 @@ module.exports = {
           } else if (type == "requestBody") {
             let content = swaggerData.paths[path][method][type]["content"];
             if (content != undefined) {
+              if (content["application/json"] == undefined) {
+                api.bodyTypeName = content[0];
+                continue;
+              }
               let modelByType = this.getModelByType(
                 content,
                 swaggerData.components.schemas
