@@ -258,11 +258,20 @@ module.exports = {
           } else {
             //success
             if (results[index].url == undefined || results[index].url == null) {
-              infos[url].pulltime = new Date();
-              infos[url].url = this.getHost(infos[url].apiUrl);
-              infos[url].apis = this.getApi(results[index]);
-              infos[url].schemas = results[index].components.schemas;
-              infos[url].success = true;
+              try {
+                infos[url].pulltime = new Date();
+                infos[url].url = this.getHost(infos[url].apiUrl);
+                infos[url].apis = this.getApi(results[index]);
+                infos[url].schemas = results[index].components.schemas;
+                infos[url].success = true;
+              } catch (error1) {
+                console.error("error1:" + new Date());
+                console.error(error1);
+                errors.push(
+                  "current error server address，please quickly recover it,we will get it again next：" +
+                    url
+                );
+              }
             } else {
               errors.push(
                 "current error server address，please quickly recover it,we will get it again next：" +
